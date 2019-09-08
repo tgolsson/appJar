@@ -13696,7 +13696,11 @@ class ScrollPane(frameBase, object):
         if self.resize:
             self.canvas.bind('<Configure>', self._updateWidth)
         else:
+            self.canvas.bind('<Configure>', self._updateFrameWidth)
             self.interior.bind('<Configure>', self._updateWidth)
+
+    def _updateFrameWidth(self, event):
+        self.canvas.itemconfig(self.interior_id, width=event.width)
 
     def _updateWidth(self, event):
         if self.resize:
